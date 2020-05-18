@@ -30,23 +30,54 @@ function runEnter() {
 
   // Select the input element and get the raw HTML node
   var inputElement = d3.select("#datetime");
+  var shapeOption = d3.select("#exampleFormControlSelect1");
 
   // Get the value property of the input element
   var inputValue = inputElement.property("value");
+  var shapeValue = shapeOption.property("value");
+  console.log(shapeValue)
+
 
   var table = document.getElementById("ufo-table");
 
   for (i = 1; i <= data.length; i++) {
     var tr = table.rows[i];
-    var value = tr.cells[0].textContent;
-    if (inputValue === "") {
+    var date = tr.cells[0].textContent;
+    var shape = tr.cells[4].textContent;
+    if (inputValue === "" & shapeValue === "--Select--") {
       tr.style.display = "";
-    } else if (value === inputValue) {
+    } else if (date === inputValue & shapeValue === "--Select--") {
+      tr.style.display = "";
+    } else if (date === inputValue & shape === shapeValue) {
+      tr.style.display = "";
+    } else if (inputValue === "" & shape === shapeValue) {
       tr.style.display = "";
     } else {
       tr.style.display = "none";
     }
   }
-
-  //var filteredData = data.filter(ufoSighting => ufoSighting.datetime === inputValue);
 };
+
+
+var uniqueShapes = []
+var sel = document.getElementById('exampleFormControlSelect1');
+
+// create new option element
+var opt = document.createElement('option');
+
+data.forEach(ufoSighting => {
+  if(uniqueShapes.indexOf(ufoSighting.shape) === -1) {
+    uniqueShapes.push(ufoSighting.shape);
+    var opt = document.createElement('option');
+    opt.appendChild(document.createTextNode(ufoSighting.shape));
+    opt.value = ufoSighting.shape;
+    sel.appendChild(opt); 
+  }
+});
+
+var reset = d3.select("#reset-btn");
+
+reset.on("click", function() {
+  document.getElementById("my-form").reset();
+  runEnter()
+});
