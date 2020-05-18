@@ -159,32 +159,52 @@ var opt = document.createElement('option');
 data.forEach(ufoSighting => {
   if(uniqueShapes.indexOf(ufoSighting.shape) === -1) {
     uniqueShapes.push(ufoSighting.shape);
-    var opt = document.createElement('option');
-    opt.appendChild(document.createTextNode(ufoSighting.shape));
-    opt.value = ufoSighting.shape;
-    sel_shps.appendChild(opt); 
+    uniqueShapes.sort();
   }
   if(uniqueCities.indexOf(ufoSighting.city) === -1) {
     uniqueCities.push(ufoSighting.city);
-    var opt = document.createElement('option');
-    opt.appendChild(document.createTextNode(ufoSighting.city));
-    opt.value = ufoSighting.city;
-    sel_city.appendChild(opt); 
+    uniqueCities.sort(); 
   }
   if(uniqueStates.indexOf(ufoSighting.state) === -1) {
     uniqueStates.push(ufoSighting.state);
-    var opt = document.createElement('option');
-    opt.appendChild(document.createTextNode(ufoSighting.state));
-    opt.value = ufoSighting.state;
-    sel_state.appendChild(opt); 
+    uniqueStates.sort(); 
   }
   if(uniqueCountries.indexOf(ufoSighting.country) === -1) {
     uniqueCountries.push(ufoSighting.country);
-    var opt = document.createElement('option');
-    opt.appendChild(document.createTextNode(ufoSighting.country));
-    opt.value = ufoSighting.country;
-    sel_ctry.appendChild(opt); 
+    uniqueCountries.sort(); 
   }
+});
+
+uniqueShapes.forEach(shape => {
+  var opt = document.createElement('option');
+  opt.appendChild(document.createTextNode(shape));
+  opt.value = shape;
+  console.log(shape);
+  sel_shps.appendChild(opt); 
+});
+
+uniqueCities.forEach(city => {
+  var opt = document.createElement('option');
+  opt.appendChild(document.createTextNode(city));
+  opt.value = city;
+  console.log(city);
+  sel_city.appendChild(opt); 
+});
+
+uniqueStates.forEach(state => {
+  var opt = document.createElement('option');
+  opt.appendChild(document.createTextNode(state));
+  opt.value = state;
+  console.log(state);
+  sel_state.appendChild(opt); 
+});
+
+uniqueCountries.forEach(country => {
+  var opt = document.createElement('option');
+  opt.appendChild(document.createTextNode(country));
+  opt.value = country;
+  console.log(country);
+  sel_ctry.appendChild(opt); 
 });
 
 var reset = d3.select("#reset-btn");
